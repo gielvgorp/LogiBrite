@@ -17,9 +17,9 @@ const RouteDetails = () => {
 };
 
   return (
-    <View>
+    <View className='flex-1'>
       <AppHeader title={`Route ${id}`} />
-      <View className='px-6 mt-4'>
+      <ScrollView className='px-6 mt-4'>
         <View className="bg-white p-4 rounded-2xl shadow mt-3 space-y-4">
           <View className="flex-row justify-between items-center">
             <View className='w-full'>
@@ -78,18 +78,17 @@ const RouteDetails = () => {
               </View>
             </View>
           </View>
-        <ScrollView 
-  className="flex-col mt-4"
-  contentContainerStyle={{ paddingBottom: 32 }} // of meer indien nodig
->
-  <StopListItem onPress={() => router.push("/route/laden/Index")} title='Laden' status='In behandeling' info={exampleInfo} stopId={<FontAwesome5 name="truck" size={17} color="white" />} />
-  <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
-  <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
-  <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
-  <StopListItem onPress={() => router.push("./stop/1")} title='Terug naar depot' info={exampleInfo} status='In behandeling' stopId={<FontAwesome5 name="truck" size={17} color="white" />} />
-</ScrollView>
-
-      </View>
+        <View 
+          className="flex-col mt-4"
+        >
+          <StopListItem onPress={() => router.push("/route/laden/Index")} title='Laden' status='In behandeling' info={exampleInfo} stopId={<FontAwesome5 name="truck" size={17} color="white" />} />
+          <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
+          <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
+          <StopListItem onPress={() => router.push("./stop/1")} title='Stationstraat 1A, Amsterdam' info={exampleInfo} status='In behandeling' stopId="1" />
+          <StopListItem onPress={() => router.push("./stop/1")} title='Terug naar depot' info={exampleInfo} status='In behandeling' stopId={<FontAwesome5 name="truck" size={17} color="white" />} />
+        </View>
+        <View className='h-10' />
+      </ScrollView>
     </View>
   )
 }

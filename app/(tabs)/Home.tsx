@@ -1,4 +1,5 @@
 import { AppHeader } from '@/components/AppHeader';
+import { MOCK_USER } from '@/constants/MockData';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -15,10 +16,10 @@ const Home = () => {
         <View className="flex-row justify-between items-center mb-6">
           <View>
             <Text className="text-gray-600 text-2xl">Welkom terug,</Text>
-            <Text className="text-4xl font-bold text-black">John Doe</Text>
+            <Text className="text-4xl font-bold text-black">{MOCK_USER.name}</Text>
           </View>
           <Image
-            source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
+            source={{ uri: MOCK_USER.avatar }}
             className="w-20 h-20 rounded-full"
           />
         </View>

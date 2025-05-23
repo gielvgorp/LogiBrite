@@ -25,3 +25,44 @@ interface LoadingItem {
   address?: string;
   totalOverview?: boolean
 }
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  avatar: string;
+}
+
+interface Route {
+  id: number;
+  driverId: number;
+  name: string;
+  date: any;
+  depotLocation: string;
+  stops: RouteStop[];
+}
+
+interface RouteStop {
+  id: string;
+  stopNumber: number;
+  scheduledTime: string;
+  status: 'In behandeling' | 'Geannuleerd' | 'Eerst volgende' | 'Geleverd';
+  deliveryNote: string;
+  items: DeliveryItems[];
+  customer: Customer;
+}
+
+interface Customer {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  zipCode: string;
+  phoneNumber: string;
+}
+
+interface DeliveryItems {
+  itemName: string;
+  quantity: number;
+}

@@ -4,13 +4,22 @@ import { addDays, format } from 'date-fns';
 const today = format(new Date(), 'dd-MM-yyyy');
 const tomorrow = format(addDays(new Date(), 1), 'dd-MM-yyyy');
 
-export const MOCK_USER: User = {
-    id: 1,
-    name: "Giel van Gorp",
-    email: "gielvgorp123@gmail.com",
-    role: "Chauffeur", 
-    avatar: ""
-}
+export const MOCK_USERS: User[] = [
+    {
+        id: 1,
+        name: "Giel van Gorp",
+        email: "gielvgorp123@gmail.com",
+        role: "Chauffeur", 
+        avatar: "https://www.crucial.com.au/wp-content/uploads/2014/07/example-person.png"
+    },
+    {
+        id: 2,
+        name: "Rik Engels",
+        email: "rikengels@gmail.com",
+        role: "Chauffeur", 
+        avatar: "https://www.crucial.com.au/wp-content/uploads/2014/07/example-person.png"
+    },
+]
 
 export const MOCK_ROUTES: Route[] = [
     {

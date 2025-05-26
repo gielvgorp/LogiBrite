@@ -1,16 +1,17 @@
 interface StopListItem {
   title: string;
   status: 'In behandeling' | 'Geannuleerd' | 'Eerst volgende' | 'Geleverd';
-  stopId: string | ReactNode;
-  info: StopListItemInfo;
+  stopId?: string;
+  stopIcon?: ReactNode;
+  info?: StopListItemInfo;
   onPress: () => void;
+  isLocked: boolean;
 }
 
 interface StopListItemInfo {
-  crates: number;
-  pallets: number;
-  rollerCart: number;
-  hasNote: boolean;
+  pallets?: number;
+  rollerCart?: number;
+  hasNote?: boolean;
 }
 
 interface StopListItemInfoItemProps {
@@ -20,10 +21,19 @@ interface StopListItemInfoItemProps {
 }
 
 interface LoadingItem {
-  stopId: string;
+  stopId: number;
   customerName: string;
   address?: string;
-  totalOverview?: boolean
+  totalOverview?: boolean;
+  items: DeliveryItems[];
+}
+
+interface RouteOfToday {
+  id: number;
+  routeName: string;
+  routeDate: string;
+  amountOfStops: number;
+  routeTime: string;
 }
 
 interface User {
@@ -38,9 +48,30 @@ interface Route {
   id: number;
   driverId: number;
   name: string;
+  car: Car;
   date: any;
   depotLocation: string;
   stops: RouteStop[];
+  status: string;
+  startOdometer: number;
+  endOdometer: number;
+  fuelAdded: number;
+  rollerCart: number;
+  pallets: number;
+  isLocked: boolean;
+}
+
+interface Car {
+  id: number;
+  type: string;
+  licencePlate: string;
+  model: string;
+}
+
+interface proofOfDelivery {
+  photoUri?: string;
+  notes?: string;
+  timestamp: string;
 }
 
 interface RouteStop {
@@ -51,6 +82,8 @@ interface RouteStop {
   deliveryNote: string;
   items: DeliveryItems[];
   customer: Customer;
+  proofOfDelivery: proofOfDelivery;
+  isCompleted: boolean;
 }
 
 interface Customer {
@@ -63,6 +96,11 @@ interface Customer {
 }
 
 interface DeliveryItems {
+  id: number;
   itemName: string;
   quantity: number;
+}
+
+interface LoadingList {
+  id: number
 }

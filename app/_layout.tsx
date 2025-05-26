@@ -17,11 +17,11 @@ export default function RootLayout() {
         options={{headerShown: false}}
       />
        <Stack.Screen 
-        name="route/stop/[id]"
+        name="route/[routeId]/stop/[stopId]"
         options={{headerShown: false}}
       />
       <Stack.Screen 
-        name="route/laden/Index"
+        name="route/laden/[id]"
         options={{headerShown: false}}
       />
     </Stack>

@@ -4,7 +4,7 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, Linking, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, Linking, Modal, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function StopDetail() {
   const { routeId, stopId } = useLocalSearchParams();  
@@ -13,6 +13,8 @@ export default function StopDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [stopInfo, setStopInfo] = useState<RouteStop>();
   const router = useRouter();
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,8 +51,7 @@ export default function StopDetail() {
     }
 
     const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
+      allowsEditing: false,
       quality: 1,
     });
 
@@ -153,12 +154,17 @@ export default function StopDetail() {
                   <TouchableOpacity
                       className="overflow-hidden border-gray-400 border border-dashed rounded flex-col justify-center items-center mt-7 h-40 w-full overflow-hidden"
                       onPress={openCamera}
+                       onLongPress={() => {
+                          if (photoUri) setIsPreviewVisible(true);
+                        }}
+                        delayLongPress={300}
                     >
                       {photoUri ? (
-                        <Image
-                          source={{ uri: photoUri }}
-                          className="w-full h-full object-cover"
-                        />
+                      <Image
+                        source={{ uri: photoUri }}
+                        className="w-full h-full object-contain"
+                        resizeMode="contain"
+                      />
                       ) : (
                         <>
                           <FontAwesome5 name="camera" size={30} color="#0062CC" />
@@ -166,6 +172,12 @@ export default function StopDetail() {
                         </>
                       )}
                     </TouchableOpacity>
+                   {photoUri && (
+                      <Text className="text-gray-400 italic mt-2 text-center">
+                        Houd de foto ingedrukt om hem te bekijken
+                      </Text>
+                    )}
+
                 <View className='mt-7'>
                   <Text className='font-bold text-xl'>Opmerking (optioneel)</Text>
                   <TextInput 
@@ -176,6 +188,22 @@ export default function StopDetail() {
                   />
                 </View>
                 <View className='h-10' />
+                <Modal
+                  visible={isPreviewVisible}
+                  transparent={true}
+                  animationType="fade"
+                  onRequestClose={() => setIsPreviewVisible(false)}
+                >
+                  <View className="flex-1 bg-black bg-opacity-90 justify-center items-center">
+                    <TouchableOpacity onPress={() => setIsPreviewVisible(false)} className="w-full h-full justify-center items-center">
+                      <Image
+                        source={{ uri: photoUri ?? '' }}
+                        className="w-full h-full object-contain"
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </Modal>
               </ScrollView>
               <View className="bg-white w-full h-[80px] shadow flex-row px-6 justify-between items-center space-x-2">
                 <TouchableOpacity className="flex-1 border border-blue-600 rounded h-10 flex-row items-center justify-center px-4 py-2 me-2">

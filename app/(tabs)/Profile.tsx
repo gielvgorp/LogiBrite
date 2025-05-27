@@ -8,17 +8,30 @@ import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-na
 export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<User>();
+  const [drivenKm, setDrivenKm] = useState(0);
+  const [completedRoutes, setCompletedRoutes] = useState(0);
+  const [completedStops, setCompletedStops] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       const userData = await userService.getDriverByID(1);
       setUser(userData);
+
+      const profileData = await userService.getDriverProfileStats(1);
+      setDrivenKm(profileData.totalKilometers);
+      setCompletedRoutes(profileData.completedRoutes);
+      setCompletedStops(profileData.completedStops);
+
       setIsLoading(false);
     };
 
     fetchData();
-  }, []); // Vergeet niet de dependency array!
+  }, []);
+
+  useEffect(() => {
+
+  }, []);
 
   const handleLogout = () => {
     router.push("../../");
@@ -45,15 +58,15 @@ export default function Profile() {
           </View>
           <View className="flex-row justify-between w-full mt-4">
             <View className="flex-1 bg-blue-600 p-4 rounded me-1">
-              <Text className="text-center text-white">0</Text>
+              <Text className="text-center text-white">{drivenKm}</Text>
               <Text className="text-center text-white">Gereden km</Text>
             </View>
             <View className="flex-1 bg-blue-600 p-4 rounded mx-1">
-              <Text className="text-center text-white">0</Text>
+              <Text className="text-center text-white">{completedRoutes}</Text>
               <Text className="text-center text-white">Routes</Text>
             </View>
             <View className="flex-1 bg-blue-600 p-4 rounded ms-1">
-              <Text className="text-center text-white">0</Text>
+              <Text className="text-center text-white">{completedStops}</Text>
               <Text className="text-center text-white">Leveringen</Text>
             </View>
           </View>

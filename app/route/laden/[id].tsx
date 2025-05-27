@@ -61,7 +61,7 @@ const Index = () => {
 };
     const handlePress = () => {
          if(!isLocked){
-            router.push("../stop/1");
+            router.push(`../${id}/stop/1`);
             return;
         }
         
@@ -85,7 +85,7 @@ const Index = () => {
             isLoading ? 
               <ActivityIndicator size="large" className='mt-5' /> :  
               <>
-                <ScrollView className='pt-8 mx-5'>
+                <ScrollView className='pt-8 px-5'>
                   <Text className='font-bold text-center text-5xl'>Laadlijst</Text>
                   {
                     
@@ -96,7 +96,7 @@ const Index = () => {
                             .sort((a, b) => b.stopNumber - a.stopNumber)
                             .map((stop) => (
                               <LoadingItem
-                                key={stop.stopNumber}
+                                key={stop.id + 1}
                                 customerName={stop.customer.name}
                                 address={stop.customer.address}
                                 items={stop.items}

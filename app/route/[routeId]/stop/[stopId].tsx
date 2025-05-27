@@ -29,16 +29,15 @@ export default function StopDetail() {
   }, []);
 
   const handleDeliveryCompleted = () => {
-    routeService.completeStop(parseInt(routeId.toString()), stopId.toString(), {
-      photoUri: photoUri ?? "",
-      notes: stopNote ?? ""
-    });
-
     if(photoUri) {
+      routeService.completeStop(parseInt(routeId.toString()), stopId.toString(), {
+        photoUri: photoUri,
+        notes: stopNote ?? ""
+      });
+
       router.push(`/route/${routeId}/stop/${parseInt(stopId.toString()) + 1}`);
       return;
     }
-      
 
     Alert.alert("Upload een foto", "Je moet een foto uploaden voordat je verder kan gaan!");
   }
@@ -68,7 +67,7 @@ export default function StopDetail() {
       >
           
       <View className='flex-1'>
-        <AppHeader title={`Stop ${stopId}`} />
+        <AppHeader title={`Stop ${stopId}`} showBackButton={true} backDestination={`../${routeId}`} />
         {
           isLoading ? 
             <ActivityIndicator size="large" className='mt-5' /> :

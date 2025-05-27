@@ -6,9 +6,10 @@ import { colors } from '../../constants/theme';
 
 export default function TabLayout() {
   return (
-    <Tabs
+   <Tabs
       screenOptions={{
         headerShown: false,
+        swipeEnabled: false, // 👈 Disable swipe between tabs
         tabBarStyle: {
           backgroundColor: colors.white,
           paddingTop: 10,
@@ -25,6 +26,7 @@ export default function TabLayout() {
         },
       }}
     >
+
       <Tabs.Screen
         name="Home"
         options={{

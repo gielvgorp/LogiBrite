@@ -107,44 +107,8 @@ getRoutesOfToDay: async (): Promise<Route[]> => {
     return stop;
   },
 
-
-
   getNextStop: async (routeId: number): Promise<RouteStop | undefined> => {
      await new Promise(resolve => setTimeout(resolve, 300));
      return MOCK_ROUTES.find(r => r.id === routeId)?.stops.find(s => s.status === "In behandeling");
-  },
-
-  getLoadingManifest: async (routeId: number) => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    const route = MOCK_ROUTES.find(r => r.id === routeId);
-    
-    if (!route) {
-      throw new Error('Route not found');
-    }
-
-    const itemMap = new Map();
-
-    route.stops.forEach(stop => {
-      stop.items.forEach(item => {
-        if (itemMap.has(item.id)) {
-          const existing = itemMap.get(item.id);
-          existing.quantity += item.quantity;
-          existing.stopNumbers.push(stop.stopNumber);
-        } else {
-          itemMap.set(item.id, {
-            item: { ...item },
-            stopNumbers: [stop.stopNumber]
-          });
-        }
-      });
-    });
-
-    const items = Array.from(itemMap.values());
-
-    return {
-      routeId,
-      items
-    };
   }
 };

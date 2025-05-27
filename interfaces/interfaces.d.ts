@@ -6,6 +6,7 @@ interface StopListItem {
   info?: StopListItemInfo;
   onPress: () => void;
   isLocked: boolean;
+  arrivalTime: string;
 }
 
 interface StopListItemInfo {
@@ -48,6 +49,7 @@ interface Route {
   id: number;
   driverId: number;
   name: string;
+  startMileage: number;
   car: Car;
   date: any;
   depotLocation: string;

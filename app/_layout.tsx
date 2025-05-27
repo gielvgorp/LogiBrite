@@ -3,7 +3,11 @@ import './globals.css';
 
 export default function RootLayout() {
   return <>
-    <Stack>
+    <Stack
+      screenOptions={{
+        gestureEnabled: false
+      }}
+    >
        <Stack.Screen 
         name="index"
         options={{headerShown: false}}
@@ -22,6 +26,10 @@ export default function RootLayout() {
       />
       <Stack.Screen 
         name="route/laden/[id]"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen 
+        name="route/[routeId]/completeRoute/Index"
         options={{headerShown: false}}
       />
     </Stack>

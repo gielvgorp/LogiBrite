@@ -1,11 +1,12 @@
 import { AppHeader } from '@/components/AppHeader';
 import CarInfoItem from '@/components/Route-overview/CarInfoItem';
+import NextStop from '@/components/Route-overview/NextStop';
 import StopListItem from '@/components/Route-overview/StopListItem';
 import { routeService } from '@/services/routeService';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Linking, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 
 const RouteDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +63,7 @@ const RouteDetails = () => {
     
      
     <View className='flex-1'>
-      <AppHeader title={`Route ${id}`} />
+      <AppHeader title={`Route ${id}`} showBackButton={true} />
       {
     isLoading || isNextStopLoading || isRouteLoading || isStopsLoading ? 
                 <ActivityIndicator className='mt-5' size="large" /> : 
@@ -81,76 +82,33 @@ const RouteDetails = () => {
               </View>
             </View>
           </View>
-          {
-            nextStop &&
-            <View className='mt-5'>
-            <Text className="text-2xl text-gray-700">
-              <Text className="font-bold">Volgende stop</Text>
-            </Text>
-            <View className='bg-white p-4 rounded-2xl shadow mt-3 space-y-4'>
-              <View className='flex-row'>
-                <View className="w-12 h-12 bg-blue-600 rounded-lg items-center justify-center">
-                  <Text className="text-white text-2xl font-semibold">{nextStop.stopNumber}</Text>
-                </View>
-                <View className='flex-col px-3 justify-center'>
-                  <Text className='text-gray-400'>{nextStop.customer.name}</Text>
-                  <Text className='font-bold mt-1'>{nextStop.customer.address}, {nextStop.customer.city}</Text>
-                </View>
-              </View>
-              {
-                nextStop.deliveryNote &&
-                <View className='w-full rounded p-3 mt-4' style={{
-                  backgroundColor: '#EEEDFF'
-                }}>
-                  <Text className='font-bold text-lg'>Bezorg informatie:</Text>
-                  <Text className='text-gray-400 mt-1'>
-                    {nextStop.deliveryNote}
-                  </Text>
-                </View>
-              }
-              <View className="flex-row justify-between items-center mt-4">
-                <TouchableOpacity 
-                  className="flex-1 border border-blue-600 px-4 py-2 rounded flex-row items-center justify-center space-x-2 bg-transparent mr-2"
-                  onPress={() => {
-                    const address = 'Vogelwikke 15, Venray';
-                    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-                    Linking.openURL(url);
-                  }}>
-                  <Text className="text-blue-600 font-medium pe-2">Start navigatie</Text>
-                  <Ionicons name="navigate-outline" size={16} color="#2563EB" />
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                  className="flex-1 bg-blue-600 px-4 py-2 rounded flex-row items-center justify-center space-x-1 shadow-sm"
-                  onPress={() => router.push(`./${id}/stop/${nextStop.stopNumber}`)}
-                  >
-                  <Text className="text-white text-sm font-semibold pe-2">Zie details</Text>
-                  <Ionicons name="arrow-forward-outline" size={16} color="white" />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-          }
+          <NextStop 
+            isLocked={isLocked}
+            routeId={id.toString()}
+            stop={nextStop}
+          />
         <View 
-          className="flex-col mt-4"
+          className="flex-col mt-7"
         >
-          <StopListItem isLocked={false} key={0} onPress={() => router.push(`/route/laden/${id}`)} title='Laden' status={!isLocked ? "Geleverd" : "In behandeling"} info={routeInfo} stopIcon={<FontAwesome5 name="truck" size={17} color="white" />} />
+          <StopListItem arrivalTime='08:00' isLocked={false} key={0} onPress={() => router.push(`/route/laden/${id}`)} title='Laden' status={!isLocked ? "Geleverd" : "In behandeling"} info={routeInfo} stopIcon={<FontAwesome5 name="truck" size={17} color="white" />} />
            { 
               stops
                 ?.map((stop: RouteStop) => (
                   <StopListItem 
-                  isLocked={isLocked ?? true}
-                  key={stop.id}
+                    isLocked={isLocked ?? true}
+                    key={stop.id}
                     onPress={() => router.push(`./${id}/stop/${stop.stopNumber}`)} 
                     title={stop.customer.address}
                     info={{
                       hasNote: stop.deliveryNote.length > 0,
                     }} 
                     status={stop.status}
-                    stopId={stop.stopNumber.toString()} />
+                    stopId={stop.stopNumber.toString()} 
+                    arrivalTime={stop.scheduledTime}
+                  />
                 ))
             }
-          <StopListItem isLocked={false} key={-1} onPress={() => router.push(`./stop/1`)} title='Terug naar depot' status='In behandeling' stopIcon={<FontAwesome5 name="truck" size={17} color="white" />} />
+          <StopListItem arrivalTime='17:00' isLocked={isLocked ?? true} key={-1} onPress={() => router.push(`/route/${id}/completeRoute/Index`)} title='Terug naar depot' status={route?.status === "completed" ? "Geleverd" : "In behandeling"} stopIcon={<FontAwesome5 name="truck" size={17} color="white" />} />
         </View>
         <View className='h-10' />
       </ScrollView>

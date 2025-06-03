@@ -28,19 +28,27 @@ export default function StopDetail() {
       fetchData();
   }, []);
 
-  const handleDeliveryCompleted = () => {
+  const handleDeliveryCompleted = async () => {
     if(photoUri) {
       routeService.completeStop(parseInt(routeId.toString()), stopId.toString(), {
         photoUri: photoUri,
         notes: stopNote ?? ""
       });
 
-      router.push(`/route/${routeId}/stop/${parseInt(stopId.toString()) + 1}`);
+      const nextStop = await routeService.getNextStop(parseInt(routeId.toString()));
+      if (nextStop === undefined) {
+        router.push(`../../${routeId}/completeRoute/Index`);
+      } else {
+        router.push(`/route/${routeId}/stop/${parseInt(nextStop.id)}`);
+      }
+
       return;
     }
 
     Alert.alert("Upload een foto", "Je moet een foto uploaden voordat je verder kan gaan!");
   }
+
+
 
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -67,7 +75,7 @@ export default function StopDetail() {
       >
           
       <View className='flex-1'>
-        <AppHeader title={`Stop ${stopId}`} showBackButton={true} backDestination={`../${routeId}`} />
+        <AppHeader title={`Stop ${stopId}`} showBackButton={true} backDestination={`../../../route/${routeId}`} />
         {
           isLoading ? 
             <ActivityIndicator size="large" className='mt-5' /> :

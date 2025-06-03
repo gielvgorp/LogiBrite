@@ -80,7 +80,7 @@ const Index = () => {
 
   return (
     <View className='flex-1'>
-        <AppHeader title='Laden' />
+        <AppHeader title='Laden' showBackButton={true} />
         {
             isLoading ? 
               <ActivityIndicator size="large" className='mt-5' /> :  

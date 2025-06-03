@@ -63,7 +63,7 @@ const RouteDetails = () => {
     
      
     <View className='flex-1'>
-      <AppHeader title={`Route ${id}`} showBackButton={true} />
+      <AppHeader title={`Route ${id}`} showBackButton={true} backDestination={`../(tabs)/Home`} />
       {
     isLoading || isNextStopLoading || isRouteLoading || isStopsLoading ? 
                 <ActivityIndicator className='mt-5' size="large" /> : 

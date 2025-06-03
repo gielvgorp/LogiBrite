@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons'; // of 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
+import { Href, useRouter } from 'expo-router';
 import React from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -17,10 +18,11 @@ export function AppHeader({
   rightAction
 }: AppHeaderProps) {
   const navigation = useNavigation<any>();
+  const router = useRouter();
 
   const handleBack = () => {
     if (backDestination) {
-      navigation.navigate(backDestination);
+      router.push(backDestination as Href);
     } else {
       navigation.goBack();
     }

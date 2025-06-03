@@ -5,7 +5,8 @@ export default function RootLayout() {
   return <>
     <Stack
       screenOptions={{
-        gestureEnabled: false
+        gestureEnabled: false,
+        animation: 'none'
       }}
     >
        <Stack.Screen 

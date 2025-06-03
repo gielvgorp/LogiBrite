@@ -57,7 +57,7 @@ export default function Index() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={60}
       >
-        <AppHeader title="Route afronden" />
+        <AppHeader title="Route afronden" showBackButton={true} />
         {isLoading ? (
           <ActivityIndicator size="large" className="mt-5" />
         ) : (

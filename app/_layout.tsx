@@ -33,6 +33,10 @@ export default function RootLayout() {
         name="route/[routeId]/completeRoute/Index"
         options={{headerShown: false}}
       />
+      <Stack.Screen 
+        name="route/[routeId]/map/Index"
+        options={{headerShown: false}}
+      />
     </Stack>
   </>;
 }

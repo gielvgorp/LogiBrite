@@ -76,10 +76,10 @@ export const MOCK_ROUTES: Route[] = [
                 ],
                 customer: {
                     id: 1,
-                    name: "Henk Janssen",
-                    address: "Stationstraat 1A",
-                    city: "Amsterdam",
-                    zipCode: "1234AB",
+                    name: "Giel van Gorp",
+                    address: "Vogelwikke 13",
+                    city: "Venray",
+                    zipCode: "5803 LL",
                     phoneNumber: "06 12345678"
                 }
             },
@@ -123,9 +123,9 @@ export const MOCK_ROUTES: Route[] = [
                 customer: {
                     id: 1,
                     name: "Saskia van Doorn",
-                    address: "Westsingel 25",
-                    city: "Amsterdam",
-                    zipCode: "1234AB",
+                    address: "Raadhuisstraat 1",
+                    city: "Venray",
+                    zipCode: "5801 MA",
                     phoneNumber: "06 12345678"
                 }
             }
@@ -139,7 +139,7 @@ export const MOCK_ROUTES: Route[] = [
         rollerCart: 3,
         isLocked: true,
         date: tomorrow,
-        depotLocation: "Vogelwikke 15, Venray",
+        depotLocation: "Vogelwikke 15, 5803 LL Venray",
         name: "Ardennen",
         endOdometer: 0,
         fuelAdded: 0,
@@ -187,9 +187,9 @@ export const MOCK_ROUTES: Route[] = [
                 customer: {
                     id: 1,
                     name: "Henk Janssen",
-                    address: "Stationstraat 1A",
-                    city: "Amsterdam",
-                    zipCode: "1234AB",
+                    address: "Rue de la Gare 49",
+                    city: "La Roche-en-Ardenne",
+                    zipCode: "6980",
                     phoneNumber: "06 12345678"
                 }
             }

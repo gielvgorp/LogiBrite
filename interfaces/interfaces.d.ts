@@ -106,3 +106,9 @@ interface DeliveryItems {
 interface LoadingList {
   id: number
 }
+
+interface Coordinates {
+  latitude: number;
+  longitude: number;
+  title?: string;
+};

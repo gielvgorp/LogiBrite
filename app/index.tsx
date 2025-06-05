@@ -35,7 +35,7 @@ export default function Index() {
               />
             </View>
             <View className="w-full flex-row justify-center mt-8">
-              <TouchableOpacity className="border border-white rounded p-4 w-64" onPress={() => router.push("/(tabs)/Home")}>
+              <TouchableOpacity className="border border-white rounded p-4 w-64" onPress={() => router.push("/(tabs)/Home")} testID="loginButton">
                 <Text className="text-center text-white text-lg font-bold">Inloggen</Text>
               </TouchableOpacity>
             </View>

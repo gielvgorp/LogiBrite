@@ -42,6 +42,7 @@ export function AppHeader({
     <View> 
       <SafeAreaView className="bg-blue-600">
         <View className="relative h-[62px] justify-center items-center">
+          
           <Text className="text-white text-2xl font-semibold absolute left-1/2 -translate-x-1/2">
             {title}
           </Text>

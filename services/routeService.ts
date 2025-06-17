@@ -133,5 +133,31 @@ createReport: async (
   getNextStop: async (routeId: number): Promise<RouteStop | undefined> => {
      await new Promise(resolve => setTimeout(resolve, 300));
      return MOCK_ROUTES.find(r => r.id === routeId)?.stops.find(s => s.status === "In behandeling");
+  },
+
+getCoordinatesFromAddress: async (address: string, labelName?: string): Promise<Coordinates | undefined> => {
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&limit=1&addressdetails=1&q=${encodeURIComponent(address)}`,
+    {
+      headers: {
+        'User-Agent': 'GielApp/1.0 (info@gielvgorp.nl)' // <- verplicht bij veel requests!
+      }
+    }
+  );
+  const data = await response.json();
+
+  if (data.length > 0) {
+    const result = data[0];
+
+    return {
+      latitude: parseFloat(result.lat),
+      longitude: parseFloat(result.lon),
+      title: labelName ?? address
+    };
+  } else {
+    console.warn(`Adres niet gevonden: ${address}`);
+    return undefined;
   }
+}
+
 };

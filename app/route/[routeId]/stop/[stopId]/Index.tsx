@@ -39,7 +39,7 @@ export default function StopDetail() {
       if (nextStop === undefined) {
         router.push(`../../${routeId}/completeRoute/Index`);
       } else {
-        router.push(`/route/${routeId}/stop/${parseInt(nextStop.id)}`);
+        router.push(`/route/${routeId}/stop/${parseInt(nextStop.id)}/Index`);
       }
 
       return;
@@ -75,7 +75,7 @@ export default function StopDetail() {
       >
           
       <View className='flex-1'>
-        <AppHeader title={`Route ${routeId}`} showBackButton={true} backDestination={`../../../route/${routeId}`} />
+        <AppHeader title={`Route ${routeId}`} showBackButton={true} backDestination={`../../../${routeId}`} />
         {
           isLoading ? 
             <ActivityIndicator size="large" className='mt-5' /> :
@@ -133,7 +133,7 @@ export default function StopDetail() {
                     </View>
                    
                     <View className='flex-col pt-3'>
-                      <Text className='text-gray-400 w-full'>{stopInfo.deliveryNote}</Text>
+                      <Text className='text-gray-400'>{stopInfo.deliveryNote}</Text>
                     </View>
                   </View>
                 }
@@ -149,7 +149,7 @@ export default function StopDetail() {
                   <View className='flex-col pt-3 flex-1'>
                     <View className='flex-col'>
                       {
-                        stopInfo?.items.map((item) => (
+                        stopInfo && stopInfo.items.map((item: DeliveryItem) => (
                             <View className='flex-row justify-between mb-1' key={item.id}>
                               <Text className='text-black font-bold'>{item.itemName}</Text>
                               <Text className='text-gray-400'>{item.quantity}</Text>
@@ -159,40 +159,54 @@ export default function StopDetail() {
                     </View>
                   </View>
                 </View>
-                  <TouchableOpacity
-                      className="overflow-hidden border-gray-400 border border-dashed rounded flex-col justify-center items-center mt-7 h-40 w-full overflow-hidden"
-                      onPress={openCamera}
-                       onLongPress={() => {
-                          if (photoUri) setIsPreviewVisible(true);
-                        }}
-                        delayLongPress={300}
-                    >
-                      {photoUri ? (
-                      <Image
-                        source={{ uri: photoUri }}
-                        className="w-full h-full object-contain"
-                        resizeMode="contain"
-                      />
-                      ) : (
-                        <>
-                          <FontAwesome5 name="camera" size={30} color="#0062CC" />
-                          <Text className="text-gray-400 font-bold pt-3">Klik hier om een foto te uploaden</Text>
-                        </>
-                      )}
-                    </TouchableOpacity>
-                   {photoUri && (
-                      <Text className="text-gray-400 italic mt-2 text-center">
-                        Houd de foto ingedrukt om hem te bekijken
-                      </Text>
-                    )}
+                <TouchableOpacity
+  className="bg-white rounded-xl shadow p-4 mt-7 w-full flex-col justify-center items-start"
+  onPress={openCamera}
+  onLongPress={() => {
+    if (photoUri) setIsPreviewVisible(true);
+  }}
+  delayLongPress={300}
+>
+  <View className="flex-row items-center pb-4">
+    <View className="w-10 h-10 flex-row justify-center items-center bg-blue-300 rounded-full">
+      <FontAwesome5 name="camera" size={15} color="#0062CC" />
+    </View>
+    <Text className="font-bold text-xl ps-3">Foto uploaden</Text>
+  </View>
 
-                <View className='mt-7'>
-                  <Text className='font-bold text-xl'>Opmerking (optioneel)</Text>
-                  <TextInput 
-                    className='border-black border p-4 rounded flex-col justify-center items-center mt-1 h-40'
-                    multiline={true}
+  <View className={`w-full h-52 ${!photoUri && "border border-dashed border-gray-300 rounded-xl"} flex items-center justify-center bg-gray-50`}>
+    {photoUri ? (
+      <Image
+        source={{ uri: photoUri }}
+        className="w-full h-full rounded-xl"
+        resizeMode="cover"
+      />
+    ) : (
+      <View className="flex-col items-center">
+        <FontAwesome5 name="camera" size={30} color="#0062CC" />
+        <Text className="text-gray-400 font-bold pt-3 text-center">
+          Klik hier om een foto te maken of uploaden
+        </Text>
+      </View>
+    )}
+  </View>
+    {photoUri && (
+    <Text className="text-gray-400 italic mt-2 text-center w-full m-auto">
+      Houd de foto ingedrukt om hem te bekijken
+    </Text>
+  )}
+</TouchableOpacity>
+
+                 <View className="flex-col bg-white p-5 rounded-xl shadow mb-5 mt-7">
+                  <Text className="font-bold text-lg mb-2">Opmerking (optioneel)</Text>
+                  <TextInput
+                    className="border border-gray-300 rounded p-3 text-base"
+                    placeholder="Voer een opmerking in..."
+                    multiline
                     value={stopNote ?? ""}
                     onChangeText={setStopNote}
+                    numberOfLines={4}
+                    textAlignVertical="top"
                   />
                 </View>
                 <View className='h-10' />
@@ -214,7 +228,7 @@ export default function StopDetail() {
                 </Modal>
               </ScrollView>
               <View className="bg-white w-full h-[80px] shadow flex-row px-6 justify-between items-center space-x-2">
-                <TouchableOpacity className="flex-1 border border-blue-600 rounded h-10 flex-row items-center justify-center px-4 py-2 me-2">
+                <TouchableOpacity onPress={() => router.push(`../report/${stopId}`)} className="flex-1 border border-blue-600 rounded h-10 flex-row items-center justify-center px-4 py-2 me-2">
                   <Text className="text-blue-600 font-bold pe-2">Probleem melden</Text>
                   <FontAwesome5 name="exclamation-triangle" size={15} color="#0062CC" />
                 </TouchableOpacity>

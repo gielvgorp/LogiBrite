@@ -97,12 +97,12 @@ const RouteDetails = () => {
                   <StopListItem 
                     isLocked={isLocked ?? true}
                     key={parseInt(stop.id)}
-                    onPress={() => router.push(`./${id}/stop/${stop.stopNumber}`)} 
+                    onPress={() => router.push(`./${id}/stop/${stop.stopNumber}/Index`)} 
                     title={stop.customer.address}
                     info={{
                       hasNote: stop.deliveryNote.length > 0,
                     }} 
-                    status={stop.status}
+                    status={stop.report ? "Report" : stop.status}
                     stopId={stop.stopNumber.toString()} 
                     arrivalTime={stop.scheduledTime}
                   />

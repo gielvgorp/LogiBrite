@@ -52,7 +52,7 @@ export default function Index() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
-        className="flex-1"
+        className="flex-1" 
       >
         <AppHeader title="Route afronden" showBackButton={true} />
         {isLoading ? (

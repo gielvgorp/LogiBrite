@@ -22,7 +22,7 @@ export default function RootLayout() {
         options={{headerShown: false}}
       />
        <Stack.Screen 
-        name="route/[routeId]/stop/[stopId]"
+        name="route/[routeId]/stop/[stopId]/Index"
         options={{headerShown: false}}
       />
       <Stack.Screen 
@@ -31,6 +31,10 @@ export default function RootLayout() {
       />
       <Stack.Screen 
         name="route/[routeId]/completeRoute/Index"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen 
+        name="route/[routeId]/stop/report/[id]"
         options={{headerShown: false}}
       />
     </Stack>

@@ -49,6 +49,29 @@ getRoutesOfToDay: async (): Promise<Route[]> => {
     return route;
   },
 
+createReport: async (
+  routeId: number,
+  stopId: string,
+  note: string,
+  items: ReportSelectedItem[]
+): Promise<DeliveryReport> => {
+  const stop = MOCK_ROUTES.find(route => route.id === routeId)
+    ?.stops.find(stop => stop.id === stopId);
+
+  if (!stop) throw new Error('Stop not found');
+
+  const newReport: DeliveryReport = {
+    id: Date.now(), // of een andere manier om uniek ID te genereren
+    note,
+    items,
+  };
+
+  stop.report = newReport;
+
+  return newReport;
+},
+
+
   completeRoute: async (routeId: number, endOdometer: number, fuelAdded: number): Promise<Route> => {
     await new Promise(resolve => setTimeout(resolve, 300));
     

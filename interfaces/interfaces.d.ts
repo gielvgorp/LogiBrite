@@ -1,6 +1,6 @@
 interface StopListItem {
   title: string;
-  status: 'In behandeling' | 'Geannuleerd' | 'Eerst volgende' | 'Geleverd';
+  status: 'In behandeling' | 'Geannuleerd' | 'Report' | 'Geleverd';
   stopId?: string;
   stopIcon?: ReactNode;
   info?: StopListItemInfo;
@@ -80,12 +80,24 @@ interface RouteStop {
   id: string;
   stopNumber: number;
   scheduledTime: string;
-  status: 'In behandeling' | 'Geannuleerd' | 'Eerst volgende' | 'Geleverd';
+  status: 'In behandeling' | 'Geannuleerd' | 'Report' | 'Geleverd';
   deliveryNote: string;
-  items: DeliveryItems[];
+  items: DeliveryItem[];
   customer: Customer;
   proofOfDelivery: proofOfDelivery;
   isCompleted: boolean;
+  report?: DeliveryReport;
+}
+
+interface DeliveryReport {
+  id: number;
+  note: string;
+  items: ReportSelectedItem[];
+}
+
+interface ReportSelectedItem {
+  itemId: number;
+  isSelected: boolean;
 }
 
 interface Customer {
@@ -97,7 +109,7 @@ interface Customer {
   phoneNumber: string;
 }
 
-interface DeliveryItems {
+interface DeliveryItem {
   id: number;
   itemName: string;
   quantity: number;

@@ -14,7 +14,7 @@ const Index = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [stops, setStops] = useState<RouteStop[] | undefined>([]);
-    const [totalItems, setTotalItems] = useState<DeliveryItems[]>([]);
+    const [totalItems, setTotalItems] = useState<DeliveryItem[]>([]);
     const router = useRouter();
 
     useEffect(() => {
@@ -36,9 +36,9 @@ const Index = () => {
         }
     }, [stops]);
 
-     const handleAddTotalItems = (newItems: DeliveryItems[]) => {
+     const handleAddTotalItems = (newItems: DeliveryItem[]) => {
   setTotalItems(prevItems => {
-    const itemsMap: Record<string, DeliveryItems> = {};
+    const itemsMap: Record<string, DeliveryItem> = {};
 
     prevItems.forEach(item => {
       itemsMap[item.id] = { ...item };
@@ -57,7 +57,7 @@ const Index = () => {
 };
     const handlePress = () => {
          if(!isLocked){
-            router.push(`../${id}/stop/1`);
+            router.push(`../${id}/stop/1/Index`);
             return;
         }
         

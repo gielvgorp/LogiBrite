@@ -11,6 +11,8 @@ export default function StopListItem({title, status, stopId, info, onPress, isLo
         return "bg-green-600";
       case "Geannuleerd":
         return "bg-red-600";
+      case "Report":
+        return "bg-orange-600";
       default:
         return "bg-blue-600";
     }

@@ -25,12 +25,12 @@ export default function RouteOfToday({ routeName, routeDate, amountOfStops, rout
 
         <View className="flex-row justify-start space-x-6 mt-5">
             <View className="flex-row items-center space-x-2">
-            <Ionicons name="location-outline" size={18} color="#6B7280" />
-            <Text className="text-sm text-gray-600 ps-1">{amountOfStops} stops</Text>
+                <Ionicons name="location-outline" size={18} color="#6B7280" />
+                <Text className="text-sm text-gray-600 ps-1">{amountOfStops} stops</Text>
             </View>
             <View className="flex-row items-center ps-4">
-            <Ionicons name="time-outline" size={18} color="#6B7280" />
-            <Text className="text-sm text-gray-600 ps-1">{routeTime}</Text>
+                <Ionicons name="time-outline" size={18} color="#6B7280" />
+                <Text className="text-sm text-gray-600 ps-1">{routeTime}</Text>
             </View>
         </View>
     </View>

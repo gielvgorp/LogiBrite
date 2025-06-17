@@ -7,15 +7,17 @@ import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 interface AppHeaderProps {
   title: string;
   showBackButton?: boolean;
+  showMapButton?: boolean;
   backDestination?: string;
+  mapDestination?: string;
   rightAction?: React.ReactNode;
 }
-
 export function AppHeader({ 
   title, 
   showBackButton = false,
   backDestination,
-  rightAction
+  showMapButton,
+  mapDestination
 }: AppHeaderProps) {
   const navigation = useNavigation<any>();
   const router = useRouter();
@@ -28,27 +30,37 @@ export function AppHeader({
     }
   };
 
+  const handleOpenMap = () => {
+    if (mapDestination) {
+      router.push(mapDestination as Href);
+    } else {
+      navigation.goBack();
+    }
+  };
+
   return (
     <View> 
       <SafeAreaView className="bg-blue-600">
-        <View className="px-4 py-3 flex-row items-center justify-between h-[62px]">
-          <View className="flex-row items-center w-full justify-between">
-            {showBackButton ? (
-              <TouchableOpacity onPress={handleBack} className="pr-4 flex-row items-center">
+        <View className="relative h-[62px] justify-center items-center">
+          <Text className="text-white text-2xl font-semibold absolute left-1/2 -translate-x-1/2">
+            {title}
+          </Text>
+
+          <View className="absolute left-4 flex-row items-center w-[80px]">
+            {showBackButton && (
+              <TouchableOpacity onPress={handleBack} className="flex-row items-center">
                 <Ionicons name="chevron-back" size={24} color="white" />
-                <Text className='text-white text-xl'>Terug</Text>
+                <Text className="text-white text-xl ml-1">Terug</Text>
               </TouchableOpacity>
-            ) : (
-              <View style={{ width: 24 }} /> // Placeholder zodat titel gecentreerd blijft
             )}
+          </View>
 
-            <Text className="text-white text-2xl font-semibold text-center flex-1">
-              {title}
-            </Text>
-
-            <View style={{ width: 24 }}>
-              {rightAction}
-            </View>
+          <View className="absolute right-4 w-[80px] items-end">
+            {showMapButton && (
+              <TouchableOpacity onPress={handleOpenMap}>
+                <Ionicons name="map" size={24} color="white" />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </SafeAreaView>

@@ -20,8 +20,8 @@ export default function LoadingItem({stopId, customerName, address, totalOvervie
             backgroundColor: '#EEEDFF'
         }}>
             {
-                items.map((item) => (
-                    <View className='flex-row w-full justify-between pb-1'>
+                items.map((item, index) => (
+                    <View className='flex-row w-full justify-between pb-1' key={index}>
                         <Text className='font-bold text-black'>{item.itemName}</Text>
                         <Text className='text-gray-400'>{item.quantity}</Text>
                     </View>

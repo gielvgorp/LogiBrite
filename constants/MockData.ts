@@ -128,7 +128,126 @@ export const MOCK_ROUTES: Route[] = [
                     zipCode: "1234AB",
                     phoneNumber: "06 12345678"
                 }
-            }
+            },
+            // Extra stops voor route vandaag (id: 123456)
+{
+    id: "3",
+    stopNumber: 3,
+    scheduledTime: "09:25",
+    status: 'In behandeling',
+    isCompleted: false,
+    proofOfDelivery: {
+        timestamp: ""
+    },
+    deliveryNote: "Achterom via steeg, aanbellen bij schuur.",
+    items: [
+        { id: 1, itemName: "Kratten", quantity: 3 },
+        { id: 2, itemName: "BVM", quantity: 10 },
+        { id: 4, itemName: "Gasfles", quantity: 2 }
+    ],
+    customer: {
+        id: 3,
+        name: "Tessa de Boer",
+        address: "Dorpsstraat 89",
+        city: "Zaandam",
+        zipCode: "1506AE",
+        phoneNumber: "06 87654321"
+    }
+},
+{
+    id: "4",
+    stopNumber: 4,
+    scheduledTime: "09:43",
+    status: 'In behandeling',
+    isCompleted: false,
+    proofOfDelivery: {
+        timestamp: ""
+    },
+    deliveryNote: "Levering bij receptie, achteringang gebruiken.",
+    items: [
+        { id: 1, itemName: "Kratten", quantity: 12 },
+        { id: 3, itemName: "Middel BBQ", quantity: 1 },
+        { id: 5, itemName: "Grote BBQ", quantity: 1 }
+    ],
+    customer: {
+        id: 4,
+        name: "Jeroen Visser",
+        address: "Julianalaan 14",
+        city: "Haarlem",
+        zipCode: "2012ES",
+        phoneNumber: "06 33445566"
+    }
+},
+{
+    id: "5",
+    stopNumber: 5,
+    scheduledTime: "10:05",
+    status: 'In behandeling',
+    isCompleted: false,
+    proofOfDelivery: {
+        timestamp: ""
+    },
+    deliveryNote: "Parkeerplaats voor de deur, bellen bij aankomst.",
+    items: [
+        { id: 2, itemName: "BVM", quantity: 15 },
+        { id: 3, itemName: "Middel BBQ", quantity: 2 }
+    ],
+    customer: {
+        id: 5,
+        name: "Anouk Meijer",
+        address: "Kennemerstraatweg 45",
+        city: "Alkmaar",
+        zipCode: "1815DA",
+        phoneNumber: "06 99887766"
+    }
+},
+{
+    id: "6",
+    stopNumber: 6,
+    scheduledTime: "10:26",
+    status: 'In behandeling',
+    isCompleted: false,
+    proofOfDelivery: {
+        timestamp: ""
+    },
+    deliveryNote: "Let op: steile oprit, voorzichtig parkeren.",
+    items: [
+        { id: 1, itemName: "Kratten", quantity: 7 },
+        { id: 4, itemName: "Gasfles", quantity: 1 }
+    ],
+    customer: {
+        id: 6,
+        name: "Bastiaan de Groot",
+        address: "Zuiddijk 102",
+        city: "Purmerend",
+        zipCode: "1441DA",
+        phoneNumber: "06 22113344"
+    }
+},
+{
+    id: "7",
+    stopNumber: 7,
+    scheduledTime: "10:47",
+    status: 'In behandeling',
+    isCompleted: false,
+    proofOfDelivery: {
+        timestamp: ""
+    },
+    deliveryNote: "BBQ graag onder de carport zetten.",
+    items: [
+        { id: 5, itemName: "Grote BBQ", quantity: 1 },
+        { id: 2, itemName: "BVM", quantity: 8 }
+    ],
+    customer: {
+        id: 7,
+        name: "Emma Bakker",
+        address: "Rijnstraat 23",
+        city: "Den Helder",
+        zipCode: "1781BV",
+        phoneNumber: "06 55667788"
+    }
+}
+
         ]
     },
     {

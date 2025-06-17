@@ -16,14 +16,12 @@ const Routes = () => {
       setIsLoading(false);
     };
     
-          fetchData();
-
+    fetchData();
   }, []);
-
+ 
   return (
     <View className='flex-1'>
       <AppHeader title='Routes' />
-
       {
         isLoading ? <ActivityIndicator size="large" className='mt-5' /> : 
         <View className='mt-5 px-6'>
@@ -32,10 +30,9 @@ const Routes = () => {
             <View className='fle-col w-full mt-1 space-x-5'>
               {
                 routes &&
-                routes.map((route) => (
-                  <View className='pb-4'>
+                routes.map((route, index) => (
+                  <View className='pb-4' key={index}>
                      <RouteOfToday
-                      key={route.id}
                       id={route.id}
                       routeDate={route.date}
                       amountOfStops={route.stops.length}

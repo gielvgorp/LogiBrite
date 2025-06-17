@@ -96,7 +96,7 @@ const RouteDetails = () => {
                 ?.map((stop: RouteStop) => (
                   <StopListItem 
                     isLocked={isLocked ?? true}
-                    key={stop.id}
+                    key={parseInt(stop.id)}
                     onPress={() => router.push(`./${id}/stop/${stop.stopNumber}`)} 
                     title={stop.customer.address}
                     info={{

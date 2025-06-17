@@ -38,15 +38,12 @@ const Index = () => {
 
      const handleAddTotalItems = (newItems: DeliveryItems[]) => {
   setTotalItems(prevItems => {
-    // Maak een kopie van de huidige items als een object map op id
     const itemsMap: Record<string, DeliveryItems> = {};
 
-    // Eerst alle bestaande items in de map stoppen
     prevItems.forEach(item => {
       itemsMap[item.id] = { ...item };
     });
 
-    // Nu door de nieuwe items loopen en optellen
     newItems.forEach(newItem => {
       if (itemsMap[newItem.id]) {
         itemsMap[newItem.id].quantity += newItem.quantity;
@@ -55,7 +52,6 @@ const Index = () => {
       }
     });
 
-    // Maak van de map weer een array voor de state
     return Object.values(itemsMap);
   });
 };
@@ -91,12 +87,12 @@ const Index = () => {
                     
                       <View className='w-full flex-col'>
                         {
-                          stops
-                            ?.slice()
+                          stops && stops
+                            .slice()
                             .sort((a, b) => b.stopNumber - a.stopNumber)
                             .map((stop) => (
                               <LoadingItem
-                                key={stop.id + 1}
+                                key={parseInt(stop.id) + 1}
                                 customerName={stop.customer.name}
                                 address={stop.customer.address}
                                 items={stop.items}

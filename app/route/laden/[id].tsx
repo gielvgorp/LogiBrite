@@ -76,7 +76,7 @@ const Index = () => {
 
   return (
     <View className='flex-1'>
-        <AppHeader title='Laden' showBackButton={true} />
+        <AppHeader title={`Route ${id}`} showBackButton={true} />
         {
             isLoading ? 
               <ActivityIndicator size="large" className='mt-5' /> :  
@@ -106,10 +106,18 @@ const Index = () => {
                     }
                   <View className='h-10' />
                 </ScrollView>
-          <TouchableOpacity onPress={handlePress} className='h-[80px] w-full bg-white flex-row items-center justify-end px-5'>
-              <View className={`${isLocked ? 'bg-red-600' : 'bg-green-600'} w-[50px] h-[50px] rounded-full flex-row items-center justify-center`}>
+          <TouchableOpacity onPress={handlePress} className='h-[80px] w-full bg-white flex-row items-center justify-center px-5'>
+              <View className={`${isLocked ? 'bg-red-600' : 'bg-green-600'} w-auto h-[50px] px-3 rounded-full flex-row items-center justify-center`}>
                   {
-                      isLocked ? <FontAwesome5 name="lock" size={15} color="white" /> : <FontAwesome5 name="unlock" size={15} color="white" />
+                      isLocked ? 
+                      <>
+                        <Text className='text-white font-bold pe-3'>Route vergrendeld</Text>
+                        <FontAwesome5 name="lock" size={15} color="white" />
+                      </> : 
+                      <>
+                        <Text className='text-white font-bold pe-3'>Route vrijgegeven</Text>
+                        <FontAwesome5 name="unlock" size={15} color="white" />
+                      </>
                   }
               </View>
           </TouchableOpacity>

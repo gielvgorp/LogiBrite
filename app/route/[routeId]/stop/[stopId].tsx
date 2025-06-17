@@ -75,7 +75,7 @@ export default function StopDetail() {
       >
           
       <View className='flex-1'>
-        <AppHeader title={`Stop ${stopId}`} showBackButton={true} backDestination={`../../../route/${routeId}`} />
+        <AppHeader title={`Route ${routeId}`} showBackButton={true} backDestination={`../../../route/${routeId}`} />
         {
           isLoading ? 
             <ActivityIndicator size="large" className='mt-5' /> :
@@ -85,6 +85,7 @@ export default function StopDetail() {
                 keyboardShouldPersistTaps="handled"
                 contentContainerStyle={{ flexGrow: 1 }}
               >
+                <Text className='font-bold text-center text-5xl pb-5'>Stop {stopId}</Text>
                 <View className='bg-white shadow p-4 rounded flex-col'>
                   <View className='flex-row items-center pb-3'>
                     <View className='w-10 h-10 flex-row justify-center items-center bg-blue-300 rounded-3xl'>
@@ -214,7 +215,7 @@ export default function StopDetail() {
               </ScrollView>
               <View className="bg-white w-full h-[80px] shadow flex-row px-6 justify-between items-center space-x-2">
                 <TouchableOpacity className="flex-1 border border-blue-600 rounded h-10 flex-row items-center justify-center px-4 py-2 me-2">
-                  <Text className="text-blue-600 font-bold pe-2">Storing melden</Text>
+                  <Text className="text-blue-600 font-bold pe-2">Probleem melden</Text>
                   <FontAwesome5 name="exclamation-triangle" size={15} color="#0062CC" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleDeliveryCompleted} className="flex-1 bg-blue-600 rounded h-10 flex-row items-center justify-center px-4 py-2">

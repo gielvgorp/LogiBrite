@@ -7,12 +7,11 @@ import {
   ActivityIndicator,
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
 
 export default function Index() {
@@ -54,16 +53,20 @@ export default function Index() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
         className="flex-1"
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={60}
       >
         <AppHeader title="Route afronden" showBackButton={true} />
         {isLoading ? (
           <ActivityIndicator size="large" className="mt-5" />
         ) : (
           <View className="flex-col justify-between w-full mt-5 px-6 flex-1 pb-20">
-            <View className="flex-col w-full">
-              <View className="flex-row justify-between pb-5">
+            <View className="flex-col w-full bg-white p-5 rounded shadow">
+              <View className='flex-row items-center pb-5'>
+                  <View className='w-10 h-10 flex-row justify-center items-center bg-blue-300 rounded-3xl'>
+                    <FontAwesome5 name="route" size={17} color="#0062CC" />
+                  </View>
+                  <Text className='font-bold text-xl ps-3'>Eindgegevens invoeren</Text>
+              </View>
+              <View className="flex-row justify-between pb-3">
                 <Text className="font-bold">Kilometer stand</Text>
                 <TextInput
                   className="border-b border-black w-[80px] text-center"
@@ -87,7 +90,7 @@ export default function Index() {
               </View>
             </View>
 
-            <View className="w-100 border-t border-blue-600 flex-col pt-3">
+            <View className="w-100 flex-col pt-3 bg-white p-5 rounded shadow">
               <View className="flex-row justify-between pb-3">
                 <Text className="font-bold">Kilometerstand begin</Text>
                 <Text className="text-gray-400">{startMileage}</Text>
@@ -102,9 +105,13 @@ export default function Index() {
               </View>
               <View className="flex-row justify-between pb-3">
                 <Text className="font-bold">Brandstof verbruik</Text>
-                <Text className="text-gray-400">1 op {fuelConsumption}</Text>
+                <Text className="text-gray-400">
+                  {isNaN(fuelConsumption) || !isFinite(fuelConsumption)
+                    ? "Niet beschikbaar"
+                    : `${fuelConsumption.toFixed(1)} km op 1 liter`}
+                </Text>
               </View>
-              <TouchableOpacity className="bg-blue-600 py-4 mb-5 rounded flex-row items-center justify-center mt-4 space-x-1 shadow-sm" onPress={handleCompleteRoute}>
+              <TouchableOpacity className="bg-blue-600 py-4 rounded flex-row items-center justify-center mt-4 space-x-1 shadow-sm" onPress={handleCompleteRoute}>
                 <Text className="text-white font-semibold me-3">Route afronden</Text>
                 <FontAwesome5 name="sign-out-alt" size={16} color="white" />
               </TouchableOpacity>

@@ -71,7 +71,7 @@ export default function Index() {
                 <TextInput
                   className="border-b border-black w-[80px] text-center"
                   keyboardType="numeric"
-                  placeholder="Liter"
+                  placeholder="Km"
                   placeholderTextColor="gray"
                   value={finalMileage}
                   onChangeText={setFinalMileage}

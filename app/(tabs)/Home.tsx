@@ -54,7 +54,7 @@ const Home = () => {
                       <RouteOfToday
                         key={route.id}
                         id={route.id}
-                        routeDate={route.date}
+                        routeDate={new Date(route.date).toLocaleDateString('nl-NL')}
                         amountOfStops={route.stops.length}
                         routeName={route.name}
                         routeTime="1u 45m"

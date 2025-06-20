@@ -31,7 +31,6 @@ useEffect(() => {
           const fullAddress = `${stop.customer.address}, ${stop.customer.zipCode} ${stop.customer.city}`;
           const coords = await routeService.getCoordinatesFromAddress(fullAddress, stop.stopNumber.toString());
           
-          console.log(coords);
           if (coords && coords.latitude && coords.longitude) {
               addressList.push(coords);
           }

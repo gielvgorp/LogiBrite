@@ -22,6 +22,7 @@ export default function StopDetail() {
         setStopInfo(stop);
         setPhotoUri(stop?.proofOfDelivery.photoUri ?? "");
         setStopNote(stop?.proofOfDelivery.notes ?? "");
+
         setIsLoading(false);
       };
 
@@ -29,26 +30,26 @@ export default function StopDetail() {
   }, []);
 
   const handleDeliveryCompleted = async () => {
-    if(photoUri) {
-      routeService.completeStop(parseInt(routeId.toString()), stopId.toString(), {
-        photoUri: photoUri,
-        notes: stopNote ?? ""
-      });
+  if (photoUri) {
+    await routeService.completeStop(parseInt(routeId.toString()), stopId.toString(), {
+      photoUri: photoUri,
+      notes: stopNote ?? "",
+      timeStamp: ""
+    });
 
-      const nextStop = await routeService.getNextStop(parseInt(routeId.toString()));
-      if (nextStop === undefined) {
-        router.push(`../../${routeId}/completeRoute/Index`);
-      } else {
-        router.push(`/route/${routeId}/stop/${parseInt(nextStop.id)}/Index`);
-      }
+    const nextStop = await routeService.getNextStop(parseInt(routeId.toString()));
 
-      return;
+    if (nextStop === undefined || !nextStop.id) {
+      router.push(`../../completeRoute/Index`);
+    } else {
+      router.push(`/route/${routeId}/stop/${parseInt(nextStop.id)}/Index`);
     }
 
-    Alert.alert("Upload een foto", "Je moet een foto uploaden voordat je verder kan gaan!");
+    return;
   }
 
-
+  Alert.alert("Upload een foto", "Je moet een foto uploaden voordat je verder kan gaan!");
+};
 
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -71,7 +72,7 @@ export default function StopDetail() {
      <KeyboardAvoidingView 
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0} // eventueel aanpassen
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
       >
           
       <View className='flex-1'>
@@ -149,7 +150,7 @@ export default function StopDetail() {
                   <View className='flex-col pt-3 flex-1'>
                     <View className='flex-col'>
                       {
-                        stopInfo && stopInfo.items.map((item: DeliveryItem) => (
+                        stopInfo?.items.map((item: DeliveryItem) => (
                             <View className='flex-row justify-between mb-1' key={item.id}>
                               <Text className='text-black font-bold'>{item.itemName}</Text>
                               <Text className='text-gray-400'>{item.quantity}</Text>

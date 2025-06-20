@@ -47,7 +47,7 @@ export default function NextStop({stop, isLocked, routeId}: NextStop) {
                       return;
                     }
                     
-                    const address = 'Vogelwikke 15, Venray';
+                    const address = `${stop.customer.address}, ${stop.customer.zipCode} ${stop.customer.city}`;
                     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
                     Linking.openURL(url);
                   }}>
@@ -63,7 +63,7 @@ export default function NextStop({stop, isLocked, routeId}: NextStop) {
                       return;
                     }
 
-                    router.push(`./${routeId}/stop/${stop.stopNumber}`)
+                    router.push(`./${routeId}/stop/${stop.stopNumber}/Index`)
                   }}
                   >
                   <Text className="text-white text-sm font-semibold pe-2">Zie details</Text>

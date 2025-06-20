@@ -106,7 +106,7 @@ const Index = () => {
                     }
                   <View className='h-10' />
                 </ScrollView>
-          <TouchableOpacity onPress={handlePress} className='h-[80px] w-full bg-white flex-row items-center justify-center px-5'>
+          <TouchableOpacity onPress={handlePress} className='h-[100px] w-full bg-white flex-row items-center justify-center px-5 border-gray'>
               <View className={`${isLocked ? 'bg-red-600' : 'bg-green-600'} w-auto h-[50px] px-3 rounded-full flex-row items-center justify-center`}>
                   {
                       isLocked ? 

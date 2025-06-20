@@ -129,7 +129,6 @@ export const MOCK_ROUTES: Route[] = [
                     phoneNumber: "06 12345678"
                 }
             },
-            // Extra stops voor route vandaag (id: 123456)
 {
     id: "3",
     stopNumber: 3,

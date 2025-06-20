@@ -30,12 +30,13 @@ export default function Index() {
     const fetchData = async () => {
       const stop = await routeService.getStopById(parseInt(routeId.toString()), id.toString());
       setItems(Array.isArray(stop?.items) ? stop.items : []);
-      // init checkbox state
+
       const initialChecks: { [key: string]: boolean } = {};
       stop?.items?.forEach((item: DeliveryItem) => {
         initialChecks[item.id] = false;
       });
 
+      console.log(stop.report);
       if (stop?.report) {
         setNote(stop.report.note);
 
@@ -43,8 +44,6 @@ export default function Index() {
           initialChecks[reportItem.itemId] = reportItem.isSelected;
         });
       }
-
-    setCheckedItems(initialChecks);
 
       setCheckedItems(initialChecks);
       setIsLoading(false);
@@ -67,9 +66,6 @@ const handleReportProblem = () => {
       isSelected,
     })
   );
-
-  console.log('Geselecteerde items:', selectedItems);
-  console.log('Opmerking:', note);
 
   routeService.createReport(
     parseInt(routeId.toString()),

@@ -21,31 +21,48 @@ const RouteDetails = () => {
   const [stops, setStops] = useState<RouteStop[] | undefined>([]);
   const [isLocked, setIsLocked] = useState(true);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        const stops = await routeService.getStops(parseInt(id.toString()));
-        setStops(stops);
-        setStopsIsLoading(false);
+   useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const routeId = parseInt(id?.toString());
+      if (isNaN(routeId)) {
+        console.warn("Route ID is ongeldig:", id);
+        return;
+      }
 
-        const route = await routeService.getRouteById(parseInt(id.toString()));
-        const info: StopListItemInfo = {
-          rollerCart: route?.rollerCart ?? 0,
-          pallets: route?.pallets ?? 0,
-        };
-        setRoute(route);
-        setRouteInfo(info);
-        setRouteIsLoading(false);
+      const stops = await routeService.getStops(routeId);
+      setStops(stops);
+      setStopsIsLoading(false);
 
-        const nextStop = await routeService.getNextStop(parseInt(id.toString()));
-        setNextStop(nextStop);
-        setNextStopIsLoading(false);
+      const route = await routeService.getRouteById(routeId);
 
-        setIsLocked(route?.isLocked ?? true);
-        setIsLoading(false);
+      if (!route) {
+        console.warn("Route niet gevonden met ID:", routeId);
+        return;
+      }
+
+      const info: StopListItemInfo = {
+        rollerCart: route.rollerCart ?? 0,
+        pallets: route.pallets ?? 0,
       };
+      setRoute(route);
+      setRouteInfo(info);
+      setRouteIsLoading(false);
 
-      fetchData();
-    }, []);
+      const nextStop = await routeService.getNextStop(routeId);
+      setNextStop(nextStop);
+      setNextStopIsLoading(false);
+
+      setIsLocked(route.isLocked ?? true);
+    } catch (error) {
+      console.error("Fout bij ophalen routegegevens:", error);
+    } finally {
+      setIsLoading(false); // Zorg dat deze altijd wordt aangeroepen
+    }
+  };
+
+  fetchData();
+}, []);
 
       useEffect(() => {
           const fetchData = async () => {

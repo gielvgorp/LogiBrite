@@ -34,7 +34,7 @@ const Routes = () => {
                   <View className='pb-4' key={index}>
                      <RouteOfToday
                       id={route.id}
-                      routeDate={route.date}
+                      routeDate={new Date(route.date).toLocaleDateString('nl-NL')}
                       amountOfStops={route.stops.length}
                       routeName={route.name}
                       routeTime="1u 45m"
